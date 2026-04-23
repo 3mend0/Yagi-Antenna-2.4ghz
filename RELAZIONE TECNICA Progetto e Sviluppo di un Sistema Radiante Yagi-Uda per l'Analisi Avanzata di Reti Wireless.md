@@ -157,6 +157,8 @@ Il montaggio del dipolo ripiegato (**Folded Dipole**) rappresenta il cuore del s
 
 ![Antenna assemblata sul banco di lavoro - vista dall'alto](<Allegati/Pasted image 20260422231352.png>)
 
+![Antenna Yagi posizionata sul bordo della balaustra durante i test all'aperto - linea di vista verso i target](<Allegati/Pasted image 20260422231409.png>)
+
 ![Dettaglio del boom in PLA turchese con i direttori in rame inseriti negli alloggiamenti](<Allegati/Pasted image 20260422231457.png>)
 
 ![Antenna posizionata sul piano di lavoro per la verifica finale pre-test](<Allegati/Pasted image 20260422231536.png>)
@@ -336,13 +338,11 @@ hashcat -m 22000 cattura.hc22000 /usr/share/wordlists/rockyou.txt -r /usr/share/
 hashcat -m 22000 cattura.hc22000 -a 3 ?l?l?l?l?l?l?l?l
 ```
 
+![Screenshot reale di aircrack-ng: "KEY FOUND! [ adminadmin ]" — la password è stata recuperata in 8 minuti testando 78.128 chiavi. Visibili Master Key, Transient Key e EAPOL HMAC](<Allegati/screenshot_aircrack_found.png>)
+
 **Perché WPA3 risolve questo problema:**
 
 WPA3 utilizza **SAE** (Simultaneous Authentication of Equals), un protocollo basato su uno scambio Diffie-Hellman che non trasmette mai un hash verificabile offline. Anche catturando lo scambio di autenticazione, non è possibile eseguire attacchi offline a dizionario: ogni tentativo richiede una nuova interazione con l'AP.
-
-![Screenshot reale di aircrack-ng: "KEY FOUND! [ adminadmin ]" — la password è stata recuperata in 8 minuti testando 78.128 chiavi. Visibili Master Key, Transient Key e EAPOL HMAC](<Allegati/screenshot_aircrack_found.png>)
-
-![Antenna Yagi posizionata sul bordo della balaustra durante i test all'aperto - linea di vista verso i target](<Allegati/Pasted image 20260422231409.png>)
 
 ---
 
