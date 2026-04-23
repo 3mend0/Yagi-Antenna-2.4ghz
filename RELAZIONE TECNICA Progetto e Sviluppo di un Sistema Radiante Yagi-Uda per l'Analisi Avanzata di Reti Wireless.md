@@ -455,72 +455,57 @@ La maggior parte dei siti moderni usa **HTTPS** (TLS), che cifra il contenuto de
 
 ---
 
-### 6.7 Fase 6 — DNS Hijacking e Captive Portal (Social Engineering)
+### 6.7 Fase 6 — Captive Portal e Social Engineering: la trappola invisibile
 
-Questa fase bypassa completamente la crittografia WPA2, ottenendo la password in chiaro senza dover craccare alcun hash. Si tratta di un attacco di **Social Engineering**: invece di attaccare la matematica della crittografia (impossibile senza password deboli), si inganna direttamente l'utente.
+Questa è la fase più elegante dell'intero attacco, e al tempo stesso la più devastante: **non si attacca la crittografia, si attacca la mente dell'utente**. Il risultato è la password Wi-Fi consegnata volontariamente dalla vittima, in chiaro, senza che nessun algoritmo venga violato.
 
-**Come funziona il DNS Hijacking:**
+---
 
-Il sistema DNS traduce i nomi di dominio in indirizzi IP. Poiché nel Rogue AP il nostro laptop è il server DNS dei dispositivi connessi (impostato via DHCP), possiamo rispondere a qualsiasi query DNS con l'IP che desideriamo.
+#### Lo scenario che tutti conosciamo: il Free Wi-Fi pubblico
 
-```bash
-# dnsmasq configurato per reindirizzare tutto il traffico DNS al nostro IP
-# Aggiunta al file /etc/dnsmasq.conf
-address=/#/192.168.1.1    # Qualsiasi dominio → il nostro IP
-```
+Pensa all'ultima volta che sei entrato in un McDonald's, in un bar, in un aeroporto o in un hotel. Hai cercato le reti Wi-Fi disponibili e hai visto qualcosa come `McDonalds_Free`, `Airport_WiFi` o `Hotel_Guests`. Hai cliccato, e prima di poter navigare ti è apparsa una pagina — il **Captive Portal** — che ti chiedeva di accettare i termini di servizio, inserire una stanza d'albergo, o semplicemente premere "Connetti".
 
-Con questa configurazione, quando la vittima apre il browser e digita `www.google.com`, la risoluzione DNS restituisce il nostro IP invece di quello di Google.
+Questo meccanismo è legittimo e diffusissimo. Ed è esattamente per questo che funziona così bene come vettore di attacco: **gli utenti sono già condizionati ad aspettarselo**.
 
-**Creazione del Captive Portal:**
+Con un Rogue AP attivo e la Yagi puntata verso un locale affollato, è sufficiente trasmettere una rete con un nome credibile (es. `WiFi_Gratis_Centro` o una copia identica della rete del locale) con un segnale più forte dell'originale. I dispositivi nelle vicinanze si connettono automaticamente. A quel punto, ogni tentativo di aprire un sito web viene intercettato e reindirizzato verso la nostra pagina — il Captive Portal fasullo.
 
-Un Captive Portal è una pagina web mostrata all'utente prima di accedere a internet — esattamente come in un hotel o un aeroporto. La nostra versione è malevola: simula un avviso ufficiale del router.
+---
 
-```bash
-# Installazione del web server
-sudo apt install -y apache2 php
+#### Lo scenario domestico: la rete identica a quella di casa
 
-# Struttura del Captive Portal
-# /var/www/html/index.html = pagina di login falsa
-# /var/www/html/save.php = script che salva le credenziali inserite
-```
+L'attacco diventa ancora più sofisticato quando il target è una rete residenziale. Come descritto nella Fase 4 (Evil Twin), il Rogue AP trasmette esattamente lo stesso nome (**ESSID**) e lo stesso indirizzo MAC (**BSSID**) del router di casa della vittima, con un segnale più potente grazie alla Yagi.
 
-La pagina HTML mostrata alla vittima simula un messaggio del tipo:
+Il dispositivo della vittima effettua il roaming automatico sul nostro AP senza mostrare alcun avviso. A quel punto, ogni pagina che l'utente prova ad aprire viene rimpiazzata da una schermata come questa:
 
-> **⚠️ Aggiornamento Firmware Router Completato**  
-> Per applicare le nuove impostazioni di sicurezza, si prega di reinserire la password Wi-Fi per confermare l'identità.  
-> [Campo password] [Conferma]
+> ---
+> **⚠️ Aggiornamento del firmware completato**
+>
+> Il tuo router ha installato un aggiornamento di sicurezza importante. Per applicare le modifiche e ripristinare l'accesso a Internet, è necessario confermare le credenziali della rete Wi-Fi.
+>
+> **Password Wi-Fi:** `_______________`
+>
+> [ Conferma e connetti ]
+> ---
 
-**Script PHP per la raccolta delle credenziali:**
+La pagina riprende grafica e colori del pannello di amministrazione del router (TIM, Vodafone, EOLO — basta copiare il logo). L'utente, che ha appena perso la connessione e non capisce perché, legge un messaggio che conosce bene ("aggiornamento router") e inserisce la password. In quel preciso momento, la password arriva in chiaro sul nostro sistema. L'utente viene poi reindirizzato automaticamente a Google, e non si accorgerà mai di nulla.
 
-```php
-<?php
-// save.php - salva la password inserita dalla vittima
-if ($_POST['password']) {
-    $log = date('Y-m-d H:i:s') . " | Password: " . $_POST['password'] . "\n";
-    file_put_contents('/tmp/credentials.txt', $log, FILE_APPEND);
-    // Reindirizza verso il sito reale per non destare sospetti
-    header('Location: http://www.google.com');
-}
-?>
-```
+---
 
-**Redirect automatico tramite iptables:**
+#### Perché questo attacco è imbattibile (sul piano umano)
 
-Per assicurarsi che qualsiasi tentativo di navigazione venga reindirizzato al captive portal:
+| Approccio tradizionale (cracking) | Social Engineering con Captive Portal |
+|----------------------------------|---------------------------------------|
+| Richiede handshake catturato | Non serve nessun pacchetto |
+| Password deve essere in un dizionario | Password qualsiasi, anche 30 caratteri casuali |
+| Può richiedere ore o giorni di calcolo | Risultato in 30 secondi |
+| Lascia tracce nei log di sistema | Nessuna traccia: è una normale sessione web |
+| Fallisce con WPA3 | Funziona su qualsiasi standard Wi-Fi |
 
-```bash
-# Redirect di tutto il traffico HTTP (porta 80) verso il nostro web server (porta 80 locale)
-sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 80
-```
+La crittografia WPA3 più robusta al mondo non serve a nulla se è l'utente stesso a consegnare la password.
 
-**Perché questo attacco è efficace:**
+---
 
-1. **Zero crittografia da forzare:** La password arriva in chiaro, digitata direttamente dalla vittima
-2. **Aspetto convincente:** L'utente medio non verifica l'autenticità di un avviso del "suo" router
-3. **Urgenza percepita:** Il messaggio di "aggiornamento sicurezza" crea un senso di necessità
-4. **Nessuna traccia tecnica:** Non ci sono log di attacco da analizzare, solo un normale accesso web
-
-**Difesa:** La consapevolezza degli utenti e l'uso di gestori di password che verificano l'URL prima dell'inserimento sono le difese più efficaci contro il phishing di questo tipo.
+**Difesa:** L'unica protezione efficace è la consapevolezza. Un router legittimo non chiede mai la password Wi-Fi tramite una pagina web. I gestori di password moderni verificano l'URL prima di compilare automaticamente le credenziali — e su una pagina falsa non troveranno nulla da compilare, avvisando implicitamente l'utente. Diffidare sempre di qualsiasi pagina che chiede la password di rete, specialmente dopo una disconnessione improvvisa.
 
 ---
 
