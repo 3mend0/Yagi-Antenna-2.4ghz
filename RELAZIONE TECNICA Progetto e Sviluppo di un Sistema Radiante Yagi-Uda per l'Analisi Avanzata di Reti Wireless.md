@@ -198,6 +198,8 @@ sudo airmon-ng start wlan0
 
 ![Antenna Yagi posizionata sul bordo della balaustra durante i test all'aperto - linea di vista verso i target](<Allegati/Pasted image 20260422231409.png>)
 
+![Cavo di discesa (feeder RG-58) posizionato lungo la balaustra per minimizzare le perdite di segnale](<Allegati/Pasted image 20260422231726.png>)
+
 ---
 
 ### 6.2 Fase 1 — Ricognizione Passiva e Analisi dello Spettro (OSINT)
@@ -400,8 +402,6 @@ sudo dnsmasq -C /etc/dnsmasq.conf
 **Ruolo determinante della Yagi:**
 
 Senza un'antenna ad alto guadagno, il segnale del Rogue AP sarebbe spesso più debole di quello del router legittimo, e i dispositivi potrebbero non effettuare il roaming. Con la Yagi puntata verso l'abitazione target, il nostro segnale risulta nettamente dominante, garantendo che tutti i dispositivi Wi-Fi presenti passino al nostro AP in pochi secondi.
-
-![Cavo di discesa (feeder RG-58) posizionato lungo la balaustra per minimizzare le perdite di segnale](<Allegati/Pasted image 20260422231726.png>)
 
 ---
 
