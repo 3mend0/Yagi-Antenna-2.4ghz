@@ -240,7 +240,7 @@ Questo comando salva su file tutti i pacchetti intercettati, inclusi eventuali h
 
 Grazie all'angolo di apertura di soli **32°**, ruotando fisicamente il boom si nota una variazione di segnale di **20-25 dBm** tra il centro del lobo principale e i lobi laterali. Questa è anche la prima prova empirica che l'antenna funziona correttamente: un sistema con elementi mal calibrati avrebbe un pattern di radiazione irregolare, senza un picco netto.
 
-![Screenshot reale di airodump-ng: lista delle reti rilevate con BSSID, canale, cifratura WPA2 e potenza del segnale in dBm](<Allegati/screenshot_airodump_handshake.png>)
+![Scansione airodump-ng in corso: lista delle reti rilevate nella zona con BSSID, canale, tipo di cifratura e potenza del segnale — fase di ricognizione passiva](<Allegati/scansione.png>)
 
 ---
 
