@@ -133,7 +133,7 @@ Il montaggio del dipolo ripiegato (**Folded Dipole**) rappresenta il cuore del s
         
 **Integrità del Segnale:** Ho utilizzato stagno ad alta qualità con anima fondente per garantire una connessione meccanica solida e una continuità elettrica perfetta. Questa attenzione previene la formazione di ossidi e minimizza le micro-resistenze di contatto, che a frequenze così elevate (**2440 MHz**) aumenterebbero drasticamente il rumore di fondo e le perdite di inserzione.
 
-![Nodo centrale di saldatura - dipolo, balun e feeder](<Allegati/Pasted image 20260422231859.png>)
+![Adattatore USB Wi-Fi esterno con connettore SMA per il collegamento all'antenna Yagi](<Allegati/Pasted image 20260422231859.png>)
 
 ![Dettaglio saldatura punto di alimentazione](<Allegati/Pasted image 20260422230007.png>)
 
@@ -148,6 +148,14 @@ Il montaggio del dipolo ripiegato (**Folded Dipole**) rappresenta il cuore del s
 ![Vista frontale - lobo di radiazione](<Allegati/Pasted image 20260422231211.png>)
 
 ![Antenna Yagi-Uda completata - vista d'insieme](<Allegati/Pasted image 20260422231644.png>)
+
+![Antenna completata - vista frontale con tutti i direttori in rame](<Allegati/Pasted image 20260422231232.png>)
+
+![Antenna assemblata sul banco di lavoro - vista dall'alto](<Allegati/Pasted image 20260422231352.png>)
+
+![Dettaglio del boom in PLA turchese con i direttori in rame inseriti negli alloggiamenti](<Allegati/Pasted image 20260422231457.png>)
+
+![Antenna posizionata sul piano di lavoro per la verifica finale pre-test](<Allegati/Pasted image 20260422231536.png>)
 
 ---
 
@@ -182,11 +190,7 @@ sudo airmon-ng start wlan0
 # L'interfaccia cambia nome: wlan0 → wlan0mon
 ```
 
-![Setup dell'antenna Yagi collegata al laptop per i test](<Allegati/Pasted image 20260422231740.png>)
-
-![Installazione esterna dell'antenna su balaustra - linea di vista verso i target](<Allegati/Pasted image 20260422231726.png>)
-
-![Schermo del laptop con interfaccia Kali Linux durante i test](<Allegati/Pasted image 20260422231409.png>)
+![Adattatore USB Wi-Fi con connettore SMA collegato al laptop - la Yagi sostituisce l'antenna integrata del PC](<Allegati/Pasted image 20260422231740.png>)
 
 ---
 
@@ -236,7 +240,7 @@ Questo comando salva su file tutti i pacchetti intercettati, inclusi eventuali h
 
 Grazie all'angolo di apertura di soli **32°**, ruotando fisicamente il boom si nota una variazione di segnale di **20-25 dBm** tra il centro del lobo principale e i lobi laterali. Questa è anche la prima prova empirica che l'antenna funziona correttamente: un sistema con elementi mal calibrati avrebbe un pattern di radiazione irregolare, senza un picco netto.
 
-![Schermata di airodump-ng con le reti rilevate e i valori di segnale](<Allegati/Pasted image 20260422230627.png>)
+![Adattatore USB Wi-Fi - dettaglio del connettore SMA e del cavo di discesa verso l'antenna](<Allegati/Pasted image 20260422230627.png>)
 
 ---
 
@@ -284,7 +288,7 @@ sudo aireplay-ng --deauth 10 -a AA:BB:CC:DD:EE:FF -c 11:22:33:44:55:66 wlan0mon
 
 Il successo dell'iniezione dipende dal fatto che i pacchetti del nostro adattatore arrivino ai dispositivi della vittima con una potenza **superiore** a quella del router legittimo. Con l'antenna Yagi puntata verso l'abitazione target, il guadagno direttivo ci garantisce un vantaggio di potenza netto, rendendo i nostri pacchetti "più credibili" di quelli del router.
 
-![Output di aireplay-ng durante l'iniezione di pacchetti deauth](<Allegati/Pasted image 20260422231232.png>)
+![Setup completo: laptop con adattatore USB collegato, pronto per la fase di packet injection](<Allegati/Pasted image 20260422231740.png>)
 
 ---
 
@@ -330,7 +334,7 @@ hashcat -m 22000 cattura.hc22000 -a 3 ?l?l?l?l?l?l?l?l
 
 WPA3 utilizza **SAE** (Simultaneous Authentication of Equals), un protocollo basato su uno scambio Diffie-Hellman che non trasmette mai un hash verificabile offline. Anche catturando lo scambio di autenticazione, non è possibile eseguire attacchi offline a dizionario: ogni tentativo richiede una nuova interazione con l'AP.
 
-![Hashcat in esecuzione - cracking dell'handshake WPA2](<Allegati/Pasted image 20260422231352.png>)
+![Antenna Yagi posizionata sul bordo della balaustra durante i test all'aperto - linea di vista verso i target](<Allegati/Pasted image 20260422231409.png>)
 
 ---
 
@@ -389,7 +393,7 @@ sudo dnsmasq -C /etc/dnsmasq.conf
 
 Senza un'antenna ad alto guadagno, il segnale del Rogue AP sarebbe spesso più debole di quello del router legittimo, e i dispositivi potrebbero non effettuare il roaming. Con la Yagi puntata verso l'abitazione target, il nostro segnale risulta nettamente dominante, garantendo che tutti i dispositivi Wi-Fi presenti passino al nostro AP in pochi secondi.
 
-![Configurazione dell'Evil Twin - output di hostapd con client connessi](<Allegati/Pasted image 20260422231457.png>)
+![Cavo di discesa (feeder RG-58) posizionato lungo la balaustra per minimizzare le perdite di segnale](<Allegati/Pasted image 20260422231726.png>)
 
 ---
 
@@ -439,7 +443,7 @@ La maggior parte dei siti moderni usa **HTTPS** (TLS), che cifra il contenuto de
 
 **Difesa:** L'utilizzo di **HSTS** (HTTP Strict Transport Security) e il pinning del certificato nelle app impedisce efficacemente gli attacchi SSL stripping.
 
-![Wireshark con il traffico della vittima in transito](<Allegati/Pasted image 20260422231536.png>)
+![Antenna Yagi collegata al laptop sul piano di lavoro - setup indoor prima del test all'aperto](<Allegati/Pasted image 20260422231536.png>)
 
 ---
 
