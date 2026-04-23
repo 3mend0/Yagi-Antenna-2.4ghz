@@ -240,7 +240,7 @@ Questo comando salva su file tutti i pacchetti intercettati, inclusi eventuali h
 
 Grazie all'angolo di apertura di soli **32°**, ruotando fisicamente il boom si nota una variazione di segnale di **20-25 dBm** tra il centro del lobo principale e i lobi laterali. Questa è anche la prima prova empirica che l'antenna funziona correttamente: un sistema con elementi mal calibrati avrebbe un pattern di radiazione irregolare, senza un picco netto.
 
-![Adattatore USB Wi-Fi - dettaglio del connettore SMA e del cavo di discesa verso l'antenna](<Allegati/Pasted image 20260422230627.png>)
+![Screenshot reale di airodump-ng: lista delle reti rilevate con BSSID, canale, cifratura WPA2 e potenza del segnale in dBm](<Allegati/screenshot_airodump_handshake.png>)
 
 ---
 
@@ -288,7 +288,9 @@ sudo aireplay-ng --deauth 10 -a AA:BB:CC:DD:EE:FF -c 11:22:33:44:55:66 wlan0mon
 
 Il successo dell'iniezione dipende dal fatto che i pacchetti del nostro adattatore arrivino ai dispositivi della vittima con una potenza **superiore** a quella del router legittimo. Con l'antenna Yagi puntata verso l'abitazione target, il guadagno direttivo ci garantisce un vantaggio di potenza netto, rendendo i nostri pacchetti "più credibili" di quelli del router.
 
-![Setup completo: laptop con adattatore USB collegato, pronto per la fase di packet injection](<Allegati/Pasted image 20260422231740.png>)
+![Screenshot reale di aireplay-ng: invio di 64 pacchetti di deautenticazione diretti verso il client target — si vede il contatore ACK che conferma la ricezione dei pacchetti da parte del dispositivo](<Allegati/screenshot_aireplay_deauth.png>)
+
+![Screenshot di airodump-ng con la conferma "WPA handshake: 78:54:2E:F6:EB:C0" in alto a destra — la cattura dell'handshake EAPOL è avvenuta con successo dopo la riconnessione forzata del client](<Allegati/screenshot_airodump_handshake.png>)
 
 ---
 
@@ -333,6 +335,8 @@ hashcat -m 22000 cattura.hc22000 -a 3 ?l?l?l?l?l?l?l?l
 **Perché WPA3 risolve questo problema:**
 
 WPA3 utilizza **SAE** (Simultaneous Authentication of Equals), un protocollo basato su uno scambio Diffie-Hellman che non trasmette mai un hash verificabile offline. Anche catturando lo scambio di autenticazione, non è possibile eseguire attacchi offline a dizionario: ogni tentativo richiede una nuova interazione con l'AP.
+
+![Screenshot reale di aircrack-ng: "KEY FOUND! [ adminadmin ]" — la password è stata recuperata in 8 minuti testando 78.128 chiavi. Visibili Master Key, Transient Key e EAPOL HMAC](<Allegati/screenshot_aircrack_found.png>)
 
 ![Antenna Yagi posizionata sul bordo della balaustra durante i test all'aperto - linea di vista verso i target](<Allegati/Pasted image 20260422231409.png>)
 
