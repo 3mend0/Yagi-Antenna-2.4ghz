@@ -545,7 +545,7 @@ In condizioni reali con linea di vista, reti a **200-300 metri** di distanza ris
 
 ---
 
-## 7. CONCLUSIONI: LA FISICA AL SERVIZIO DELLA CYBERSECURITY
+## 7. CONCLUSIONI
 
 Il progetto dimostra con evidenza empirica che la sicurezza informatica non è un concetto astratto fatto di soli codici e algoritmi, ma una sfida che parte dal **livello fisico (Layer 1)** del modello OSI.
 
