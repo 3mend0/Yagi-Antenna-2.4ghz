@@ -51,6 +51,10 @@ Per i 2440 MHz (Canale 7 Wi-Fi), $\lambda$ è circa **123 mm**.
 
 > _Nota di progettazione:_ Dopo aver preso in considerazione le dimensioni dell'area di stampa della mia **stampante 3D** (fondamentale per garantire la fattibilità del supporto) e aver definito l'ingombro massimo desiderato per l'antenna, ho impostato i parametri strutturali nel software. L'algoritmo ha quindi elaborato l'intera serie di calcoli basandosi sulla frequenza di riferimento, ottimizzando le spaziature per massimizzare il rapporto fronte-retro e il guadagno.
 
+![VK5DJ's Yagi Calculator — output completo con riflettore, radiatore e 13 direttori a 2440 MHz](<Allegati/vk5dj_calculator_output.png>)
+
+![VK5DJ's Yagi Calculator — guida materiali e schema costruttivo del dipolo ripiegato](<Allegati/vk5dj_materials_guide.png>)
+
 ---
 
 ## 4. IL CUORE ELETTRONICO: DIPOLO RIPIEGATO E ADATTAMENTO D'IMPEDENZA
