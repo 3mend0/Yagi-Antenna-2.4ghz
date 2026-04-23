@@ -227,6 +227,8 @@ sudo airodump-ng wlan0mon
 | `AUTH`  | Tipo di autenticazione (PSK = Pre-Shared Key, MGT = Enterprise 802.1X) |
 | `ESSID` | Nome della rete (Service Set Identifier) |
 
+![Scansione airodump-ng in corso: lista delle reti rilevate nella zona con BSSID, canale, tipo di cifratura e potenza del segnale — fase di ricognizione passiva](<Allegati/scansione.png>)
+
 **Vantaggio dell'antenna Yagi nella ricognizione:**
 
 Con un'antenna omnidirezionale standard da **2 dBi** integrata nel laptop, reti poste a 100+ metri appaiono con valori di segnale di **-85/-90 dBm** — una soglia critica in cui la ricezione è inaffidabile e il packet injection impossibile.
@@ -247,8 +249,6 @@ Questo comando salva su file tutti i pacchetti intercettati, inclusi eventuali h
 **Rotazione dell'antenna per identificare la direzione del target:**
 
 Grazie all'angolo di apertura di soli **32°**, ruotando fisicamente il boom si nota una variazione di segnale di **20-25 dBm** tra il centro del lobo principale e i lobi laterali. Questa è anche la prima prova empirica che l'antenna funziona correttamente: un sistema con elementi mal calibrati avrebbe un pattern di radiazione irregolare, senza un picco netto.
-
-![Scansione airodump-ng in corso: lista delle reti rilevate nella zona con BSSID, canale, tipo di cifratura e potenza del segnale — fase di ricognizione passiva](<Allegati/scansione.png>)
 
 ---
 
