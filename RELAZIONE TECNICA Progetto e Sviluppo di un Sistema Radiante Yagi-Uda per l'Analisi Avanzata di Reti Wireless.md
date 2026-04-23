@@ -64,7 +64,6 @@ Questa sezione riguarda la trasduzione del segnale elettrico in onda elettromagn
 - **Il Folded Dipole (Dipolo Ripiegato):** A differenza di un dipolo semplice a mezz'onda (impedenza ~73 Ohm), ho scelto un dipolo ripiegato. Questa scelta offre due vantaggi principali:
     
     1. **Larghezza di banda maggiore:** fondamentale per coprire l'intera gamma dei canali Wi-Fi (2412-2472 MHz).
-        
     2. **Impedenza elevata:** un dipolo ripiegato isolato ha un'impedenza caratteristica di circa **300 Ohm**.
         
 - **La necessità del Balun 4:1:** Le schede di rete e i cavi coassiali (come l'**RG-58**) lavorano su un'impedenza sbilanciata di **50 Ohm**. Collegare direttamente un cavo da 50 Ohm a un'antenna da 300 Ohm creerebbe un forte disadattamento, generando onde stazionarie (SWR alto) che dissiperebbero la potenza in calore invece di irradiarla.
@@ -72,9 +71,7 @@ Questa sezione riguarda la trasduzione del segnale elettrico in onda elettromagn
 - **Calcolo Tecnico del Balun a Mezz'onda:** Per trasformare l'impedenza (rapporto 4:1) e bilanciare il segnale, ho realizzato un loop di cavo coassiale.
     
     - **Formula fisica:** La lunghezza del loop deve essere pari a mezza lunghezza d'onda elettrica.
-        
     - **Fattore di Velocità ($V_f$):** Poiché l'onda viaggia nel dielettrico del cavo (polietilene) più lentamente che nel vuoto, ho applicato il fattore di velocità di **0,66** tipico dell'RG-58.
-        
     - **Risultato:** $123 \text{ mm} / 2 \times 0.66 = 40.59 \text{ mm} \approx \mathbf{41 \text{ mm}}$.
 
 ![Schema del Balun 4:1](<Allegati/Pasted image 20260422223557.png>)
@@ -85,15 +82,13 @@ Questa sezione riguarda la trasduzione del segnale elettrico in onda elettromagn
 
 ## 5. PROCESSO DI FABBRICAZIONE E ASSEMBLAGGIO
 
-Il passaggio dalla teoria alla realtà fisica ha richiesto un controllo rigoroso delle tolleranze, poiché a **2,4 GHz** anche un errore di un millimetro può compromettere il guadagno dell'antenna.
-
 ### 5.1 Ingegnerizzazione del Boom e Stampa 3D
 
 Il supporto centrale (boom) ha una lunghezza totale di **531,5 mm**. La scelta del **PLA** tramite stampa 3D non è stata solo estetica, ma tecnica:
 
 - **Neutralità Elettromagnetica:** Un boom metallico agirebbe come un elemento parassita aggiuntivo non calcolato, richiedendo un "fattore di correzione del boom". Usando la plastica (dielettrico), il supporto è "invisibile" alle onde, permettendo agli elementi di risuonare esattamente come previsto dal software.
     
-- **Precisione CAD:** Il design prevede alloggiamenti millimetrici per garantire che ogni elemento rispetti la quota **"IT" (Insert To)**. Questa quota è fondamentale per il centramento: ad esempio, per il Riflettore, la punta dell'elemento dista esattamente **24,5 mm** dal bordo del boom per assicurarne il perfetto equilibrio elettromagnetico.
+- **Precisione CAD:** Il design prevede alloggiamenti millimetrici per garantire che ogni elemento rispetti la quota **"IT" (Insert To)**. Questa quota è fondamentale per il centramento.
 
 ![Boom stampato in 3D con alloggiamenti per gli elementi](<Allegati/Pasted image 20260422224317.png>)
 
@@ -563,13 +558,7 @@ Il progetto dimostra con evidenza empirica che la sicurezza informatica non è u
 - L'attacco Evil Twin ha evidenziato come il roaming automatico dei dispositivi Wi-Fi sia una superficie di attacco sfruttabile con hardware ad alto guadagno
 - Il Captive Portal ha dimostrato che il Social Engineering può essere più efficace degli attacchi crittografici
 
-### 7.2 Sinergia Multidisciplinare
-
-La riuscita dell'esperimento conferma che la comprensione della **Radiotecnica** (SWR, impedenza, guadagno, lobi di radiazione) unita alla **Meccanica di precisione** (stampa 3D, calibro, tolleranze) e alla **Informatica** (protocolli 802.11, suite Aircrack-ng, gestione di rete Linux) è la chiave per padroneggiare — e difendere — i sistemi wireless moderni.
-
-### 7.3 Implicazioni per la Difesa
-
-Questo lavoro evidenzia le seguenti contromisure prioritarie:
+### 7.2 Difesa
 
 | Vulnerabilità sfruttata | Contromisura efficace |
 |------------------------|----------------------|
@@ -580,7 +569,7 @@ Questo lavoro evidenzia le seguenti contromisure prioritarie:
 | DNS Hijacking / Captive Portal | **DoH** (DNS over HTTPS) e gestori di password con verifica URL |
 | MITM su HTTP | **HTTPS ovunque** + **HSTS Preloading** |
 
-### 7.4 Riflessione Finale
+### 7.3 Riflessione Finale
 
 Un'antenna costruita con meno di 20€ di materiali (rame, PLA, connettore SMA) e una settimana di lavoro ha permesso di estendere il raggio di un attacco wireless da pochi decine di metri a **centinaia di metri**, rendendo l'attaccante completamente invisibile alla vittima. Questo non è un exploit software: è fisica applicata.
 
