@@ -157,8 +157,6 @@ Il montaggio del dipolo ripiegato (**Folded Dipole**) rappresenta il cuore del s
 
 ![Antenna assemblata sul banco di lavoro - vista dall'alto](<Allegati/Pasted image 20260422231352.png>)
 
-![Antenna Yagi posizionata sul bordo della balaustra durante i test all'aperto - linea di vista verso i target](<Allegati/Pasted image 20260422231409.png>)
-
 ![Dettaglio del boom in PLA turchese con i direttori in rame inseriti negli alloggiamenti](<Allegati/Pasted image 20260422231457.png>)
 
 ![Antenna posizionata sul piano di lavoro per la verifica finale pre-test](<Allegati/Pasted image 20260422231536.png>)
@@ -197,6 +195,8 @@ sudo airmon-ng start wlan0
 ```
 
 ![Adattatore USB Wi-Fi con connettore SMA collegato al laptop - la Yagi sostituisce l'antenna integrata del PC](<Allegati/Pasted image 20260422231740.png>)
+
+![Antenna Yagi posizionata sul bordo della balaustra durante i test all'aperto - linea di vista verso i target](<Allegati/Pasted image 20260422231409.png>)
 
 ---
 
